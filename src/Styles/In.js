@@ -42,21 +42,21 @@ const Style = StyleSheet.create({
 		    Text: {
 		    	 color: 'white',
 		    	 fontWeight: 'bold',
-		    	 fontSize: '5vw'
+		    	 fontSize: '6vw'
 		    },
 	    },
 	    InContainer: {
 	    	display: 'flex',
 		    flexDirection: 'column',
 		    justifyContent: 'flex-end',
-		    gap: '4vw',
+		    gap: '3vw',
 		    height: '65%',
 		    width: '90%',
 		    TextInput: {
 		    	width: '100%',
-			    height: '5vmin',
+			    height: '7vmin',
 			    padding: '5px',
-			    fontSize: '3vw',
+			    fontSize: '4vw',
 			    border: '1px solid gray',
 			    color: 'gray',
 			    backgroundColor:  'white',
@@ -80,7 +80,7 @@ const Style = StyleSheet.create({
 			    Text: {
 			    	textAlign: 'center',
 			    	color: 'white',
-			    	fontSize: '4vw',
+			    	fontSize: '5vw',
 			    }
 		    }
 	    }

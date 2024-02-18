@@ -2,14 +2,14 @@ import { useState, useEffect } from 'react'
 import { View, Text, Pressable, TextInput } from 'react-native';
 import axios from 'axios'
 import Styles from '../Styles/In.js'
-
-import useUserContext from '../UserContext'
+import { useDataContext } from '../Context/DataContext'
+import storage from '../storage'
 
 const ServerUrl = 'https://standby-yd62.onrender.com';
 
 export default function LogScreen({ navigation }) {
 
-  var { user, setUser } = useUserContext();
+  const { login, ChangeUser } = useDataContext();
 
   const [username, onChangeUsername] = useState('')
   const [password, onChangePassword] = useState('')
@@ -25,16 +25,26 @@ export default function LogScreen({ navigation }) {
           return
       }
 
+      const SaveUserInStorage = async (currentUser) => {
+        try{
+          await storage.save({ key: 'user', data: currentUser })
+          console.log('User saved sucessful!')
+        }catch(err){
+          console.log('Some error while saving user...')
+        }
+      }
+
       let currentUser = users.find(u => u.username === username);
 
       if(currentUser){
           try{
               const decryptedPassword = await axios.post(`${ServerUrl}/crypt/decrypt`, {texts: new Array(currentUser.password)})
               if(password === decryptedPassword.data.decrypted[0]){
-                  console.log('Decrypted correctly')
-                  console.log('User ready')
-                  user = currentUser;
                   console.log('User done')
+                  SaveUserInStorage(currentUser)
+                  console.log('User saved')
+                  ChangeUser(currentUser)
+                  login()
               }else{
                   setMessage('Username or password wrong...')
               }
@@ -54,7 +64,7 @@ export default function LogScreen({ navigation }) {
         <View style={Styles?.Main?.InContainer}>
             <TextInput style={Styles?.Main?.InContainer?.TextInput} onChangeText={onChangeUsername} value={username} placeholder="Username" />
             <TextInput style={Styles?.Main?.InContainer?.TextInput} onChangeText={onChangePassword} value={password} placeholder="Password" />
-            <Text style={{height: '20px', textAlign: 'center'}}>{ message }</Text>
+            <Text style={{height: '20px', textAlign: 'center', fontSize: 19}}>{ message }</Text>
         </View>
         <View style={Styles?.Main?.SendContainer}>
             <Pressable style={Styles?.Main?.SendContainer?.Pressable} onPress={() => Validate()}>

@@ -51,7 +51,7 @@ export default function SignScreen({ navigation }) {
             <TextInput style={Styles?.Main?.InContainer?.TextInput} onChangeText={onChangeUsername} value={username} placeholder="Username" />
             <TextInput style={Styles?.Main?.InContainer?.TextInput} onChangeText={onChangePassword} value={password} placeholder="Password" />
             <TextInput style={Styles?.Main?.InContainer?.TextInput} onChangeText={onChangeRepeatedPassword} value={repeatedPassword} placeholder="Repeat password" />
-            <Text style={{height: '20px', textAlign: 'center'}}>{ message }</Text>
+            <Text style={{height: '20px', textAlign: 'center', fontSize: 19}}>{ message }</Text>
         </View>
         <View style={Styles?.Main?.SendContainer}>
             <Pressable style={Styles?.Main?.SendContainer?.Pressable} onPress={() => Validate()}>

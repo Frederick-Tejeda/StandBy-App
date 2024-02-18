@@ -1,11 +1,11 @@
 import { View, Text, Pressable } from 'react-native';
 
 import storage from '../storage.js'
-import useUserContext from '../UserContext'
+import { useDataContext } from '../Context/DataContext'
 
 export default function AccountScreen({ navigation }) {
 
-  var { user, setUser, isLoggedIn, setIsLoggedIn, inStorage, setInStorage } = useUserContext()
+  //var { user, setUser, isLoggedIn, setIsLoggedIn, inStorage, setInStorage } = useUserContext()
 
   const LogOut = async () => {
     console.log('user', user)
